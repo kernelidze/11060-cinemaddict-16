@@ -1,7 +1,8 @@
-import {favoriteCardsCount, inWatchlistCardsCount, watchedCardsCount} from '../main.js';
+import {mainNavigationItemsCount} from '../filter.js';
 
-export const createSiteMenuTemplate = () => (
-  `<nav class="main-navigation">
+export const createSiteMenuTemplate = () => {
+  const {favoriteCardsCount, watchedCardsCount, inWatchlistCardsCount} = mainNavigationItemsCount();
+  return `<nav class="main-navigation">
     <div class="main-navigation__items">
       <a href="#all" class="main-navigation__item main-navigation__item--active">All movies</a>
       <a href="#watchlist" class="main-navigation__item">Watchlist <span class="main-navigation__item-count">${inWatchlistCardsCount}</span></a>
@@ -15,5 +16,5 @@ export const createSiteMenuTemplate = () => (
     <li><a href="#" class="sort__button">Sort by default</a></li>
     <li><a href="#" class="sort__button">Sort by date</a></li>
     <li><a href="#" class="sort__button sort__button--active">Sort by rating</a></li>
-  </ul>`
-);
+  </ul>`;
+};

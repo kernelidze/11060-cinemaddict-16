@@ -37,6 +37,7 @@ const generateCardDuration = () => {
 };
 
 const generateCardGenre = () => {
+  const randomGenresCount = getRandomInteger(1, 4);
   const genres = [
     'Comedy',
     'Musical',
@@ -44,7 +45,8 @@ const generateCardGenre = () => {
     'Drama',
     'Action'
   ];
-  return genres;
+  const randomGenresArray = getRandomRangeFromArray(genres);
+  return {randomGenresArray, randomGenresCount};
 };
 
 const generateCardPoster = () => {
@@ -71,6 +73,7 @@ const generateCardDescription = () => {
 
 
 const generateCardCommentary = () => {
+  const randomCommentaryCount = getRandomInteger(1, 6);
   const MAX_HOUR_GAP = 100000;
   const commentaryDate = [];
   const maxCommentsDateCount = getRandomInteger(10, 50);
@@ -105,7 +108,7 @@ const generateCardCommentary = () => {
     'Keanu'
   ];
 
-  return {emojis, commentaryText, commentaryAuthor, commentaryDate};
+  return {emojis, commentaryText, commentaryAuthor, commentaryDate, randomCommentaryCount};
 };
 
 export const generateCard = () => ({

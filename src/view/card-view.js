@@ -1,9 +1,7 @@
 import dayjs from 'dayjs';
-import { getRandomInteger } from '../utils.js';
-import {randomCommentaryCount} from '../main.js';
 
 export const createCardTemplate = (card) => {
-  const {title, rating, year, filmDuration, genre, poster, description, isWatched, isFavorite, isInWatchlist} = card;
+  const {title, rating, year, filmDuration, genre, poster, description, comments, isWatched, isFavorite, isInWatchlist} = card;
   const date = dayjs(year).format('YYYY');
 
   const MAX_SYMBOLS = 140;
@@ -35,11 +33,11 @@ export const createCardTemplate = (card) => {
       <p class="film-card__info">
         <span class="film-card__year">${date}</span>
         <span class="film-card__duration">${filmDuration}</span>
-        <span class="film-card__genre">${genre[getRandomInteger(0, genre.length - 1)]}</span>
+        <span class="film-card__genre">${genre.randomGenresArray[0]}</span>
       </p>
       <img src="./images/posters/${poster}" alt="" class="film-card__poster">
       <p class="film-card__description">${slicedDescription}</p>
-      <span class="film-card__comments">${randomCommentaryCount} comments</span>
+      <span class="film-card__comments">${comments.randomCommentaryCount} comments</span>
     </a>
     <div class="film-card__controls">
       <button class="film-card__controls-item film-card__controls-item--add-to-watchlist ${watchlistClassName}" type="button">Add to watchlist</button>

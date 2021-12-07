@@ -1,9 +1,8 @@
 import dayjs from 'dayjs';
-import {randomCommentaryCount} from '../main.js';
 
 export const createPopupTemplate = (film) => {
-
-  const {title, rating, year, filmDuration, poster, description, isWatched, isFavorite, isInWatchlist} = film;
+//const title = film.title;
+  const {title, rating, year, filmDuration, poster, description, comments, isWatched, isFavorite, isInWatchlist} = film;
   const date = dayjs(year).format('D MMMM YYYY');
 
   const watchedClassName = isWatched
@@ -88,7 +87,7 @@ export const createPopupTemplate = (film) => {
 
     <div class="film-details__bottom-container">
       <section class="film-details__comments-wrap">
-        <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${randomCommentaryCount}</span></h3>
+        <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${comments.randomCommentaryCount}</span></h3>
 
         <ul class="film-details__comments-list">
 
