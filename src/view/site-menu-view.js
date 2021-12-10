@@ -1,6 +1,7 @@
 import {mainNavigationItemsCount} from '../filter.js';
+import {createElement} from '../render.js';
 
-export const createSiteMenuTemplate = () => {
+const createSiteMenuTemplate = () => {
   const {favoriteCardsCount, watchedCardsCount, inWatchlistCardsCount} = mainNavigationItemsCount();
   return `<nav class="main-navigation">
     <div class="main-navigation__items">
@@ -18,3 +19,23 @@ export const createSiteMenuTemplate = () => {
     <li><a href="#" class="sort__button sort__button--active">Sort by rating</a></li>
   </ul>`;
 };
+
+export default class SiteMenuView {
+  #element = null;
+
+  get element() {
+    if (!this.#element) {
+      this.#element = createElement(this.template);
+    }
+
+    return this.#element;
+  }
+
+  get template() {
+    return createSiteMenuTemplate();
+  }
+
+  removeElement() {
+    this.#element = null;
+  }
+}
