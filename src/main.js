@@ -35,13 +35,15 @@ render(siteMainElement, FilmsListContainerViewClass.element, RenderPosition.BEFO
 const siteFilmsListSection = siteMainElement.querySelector('.films-list');
 const siteFilmsListSectionContainer = siteMainElement.querySelector('.films-list__container');
 for (let i = 0; i < CARDS_COUNT_TEMPLATES_PER_STEP; i++) {
-  render(siteFilmsListSectionContainer, new CardView(cards[i]).element, RenderPosition.BEFOREEND);
+  const CardViewClass = new CardView(cards[i]);
+  render(siteFilmsListSectionContainer, CardViewClass.element, RenderPosition.BEFOREEND);
 }
 
 let cardsPostersForClick = siteFilmsListSectionContainer.querySelectorAll('.film-card__poster');
 
 const generateClickCards = (renderedCardsCount = 0) => {
   cardsPostersForClick.forEach((poster, index) => {
+    const PopupViewClass = new PopupView(cards[index]);
     if (index > renderedCardsCount - 1) {
       poster.addEventListener('click', () => {
         const prevPopup = document.querySelector('.film-details');
@@ -49,17 +51,19 @@ const generateClickCards = (renderedCardsCount = 0) => {
           siteMainElement.removeChild(prevPopup);
         }
 
-        render(siteMainElement, new PopupView(cards[index]).element, RenderPosition.BEFOREEND);
+        render(siteMainElement, PopupViewClass.element, RenderPosition.BEFOREEND);
         document.body.classList.add('hide-overflow');
         const popupFilmDetailTable = document.querySelector('.film-details__table');
         const popupFilmDetailGenre = popupFilmDetailTable.querySelector('tr:last-child >td:last-child');
         for (let i = 0; i < cards[index].genre.randomGenresArray.length; i++) {
-          render(popupFilmDetailGenre, new GenreView(cards[index].genre.randomGenresArray[i]).element, RenderPosition.BEFOREEND);
+          const GenreViewClass = new GenreView(cards[index].genre.randomGenresArray[i]);
+          render(popupFilmDetailGenre, GenreViewClass.element, RenderPosition.BEFOREEND);
         }
 
         const commentaryListSection = document.querySelector('.film-details__comments-list');
         for (let i = 0; i < cards[index].comments.randomCommentaryCount; i++) {
-          render(commentaryListSection, new CommentsView(cards[index]).element, RenderPosition.AFTERBEGIN);
+          const CommentsViewClass = new CommentsView(cards[index]);
+          render(commentaryListSection, CommentsViewClass.element, RenderPosition.AFTERBEGIN);
         }
 
         const popup = document.querySelector('.film-details');
