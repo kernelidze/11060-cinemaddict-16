@@ -1,6 +1,7 @@
 import {mainNavigationItemsCount} from '../filter.js';
+import {createElement} from '../render.js';
 
-export const createStatisticTemplate = () => {
+const createStatisticTemplate = () => {
   const {watchedCardsCount} = mainNavigationItemsCount();
 
   return `<section class="statistic">
@@ -53,3 +54,23 @@ export const createStatisticTemplate = () => {
 
   </section>`;
 };
+
+export default class StatisticsView {
+  #element = null;
+
+  get element() {
+    if (!this.#element) {
+      this.#element = createElement(this.template);
+    }
+
+    return this.#element;
+  }
+
+  get template() {
+    return createStatisticTemplate();
+  }
+
+  removeElement() {
+    this.#element = null;
+  }
+}

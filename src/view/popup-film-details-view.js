@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
+import {createElement} from '../render.js';
 
-export const createPopupTemplate = (film) => {
-//const title = film.title;
+const createPopupTemplate = (film) => {
   const {title, rating, year, filmDuration, poster, description, comments, isWatched, isFavorite, isInWatchlist} = film;
   const date = dayjs(year).format('D MMMM YYYY');
 
@@ -127,3 +127,28 @@ export const createPopupTemplate = (film) => {
   </form>
 </section>`;
 };
+
+export default class PopupView {
+  #element = null;
+  #film = null;
+
+  constructor(film) {
+    this.#film = film;
+  }
+
+  get element() {
+    if (!this.#element) {
+      this.#element = createElement(this.template);
+    }
+
+    return this.#element;
+  }
+
+  get template() {
+    return createPopupTemplate(this.#film);
+  }
+
+  removeElement() {
+    this.#element = null;
+  }
+}

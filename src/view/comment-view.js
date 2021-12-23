@@ -1,6 +1,7 @@
 import {getRandomInteger} from '../utils.js';
+import {createElement} from '../render.js';
 
-export const createCommentaryTemplate = (card) => {
+const createCommentaryTemplate = (card) => {
   const {comments} = card;
   const {emojis, commentaryAuthor, commentaryDate, commentaryText} = comments;
   return `<li class="film-details__comment">
@@ -17,3 +18,28 @@ export const createCommentaryTemplate = (card) => {
       </div>
     </li>`;
 };
+
+export default class CommentsView {
+  #element = null;
+  #cards = null;
+
+  constructor(cards) {
+    this.#cards = cards;
+  }
+
+  get element() {
+    if (!this.#element) {
+      this.#element = createElement(this.template);
+    }
+
+    return this.#element;
+  }
+
+  get template() {
+    return createCommentaryTemplate(this.#cards);
+  }
+
+  removeElement() {
+    this.#element = null;
+  }
+}
